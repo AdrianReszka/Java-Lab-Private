@@ -3,6 +3,9 @@ import Model.*;
 import View.StudentListView;
 import Model.MessagePrinter;
 
+import java.util.Collections;
+import java.util.Comparator;
+
 
 /**
  * Controller responsible for managing a list of students and handling the interaction between the model and the view.
@@ -139,9 +142,10 @@ public class StudentListController {
     }
 
     /**
-     * Updates the view with the current list of students.
+     * Updates the view with the current list of students and sorts it by id
      */
     public void updateView() {
+        Collections.sort(studentList.getStudents(), Comparator.comparingInt(Student::getId));
         studentListView.printStudents(studentList.getStudents());
     }
 
