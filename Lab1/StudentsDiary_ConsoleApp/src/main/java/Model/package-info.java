@@ -4,6 +4,8 @@
  * grades, and custom exceptions for managing application-specific errors.
  *
  * Key classes:
+ * - {@link Model.MainMenu} -
+ * Represents main menu of the program
  * - {@link Model.Student} -
  * Represents a student in the application.
  * - {@link Model.Grade} -

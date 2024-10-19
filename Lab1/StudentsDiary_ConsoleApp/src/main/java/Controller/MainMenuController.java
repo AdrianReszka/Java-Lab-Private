@@ -1,10 +1,8 @@
 package Controller;
 
-import Model.*;
+import Model.MainMenu;
 import Model.MessagePrinter;
 import View.MainMenuView;
-
-import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -16,60 +14,49 @@ import java.util.Scanner;
  */
 public class MainMenuController {
 
-    /**
-     * A scanner object used to capture user input from the console for general menu selections and numeric inputs.
-     */
+    /** A scanner object used to capture user input from the console for general menu selections and numeric inputs. */
     private Scanner scanner;
 
-    /**
-     * A scanner object configured to capture input from the console, specifically using a newline as the delimiter.
-     * This is useful for reading strings with spaces.
-     */
+    /** A scanner object configured to capture input from the console, specifically using a newline as the delimiter. */
     private Scanner spacebarScanner;
 
-    /**
-     * The controller responsible for managing student data, such as adding, removing, and updating students.
-     */
-    private StudentListController studentListController;
+    /** Model class representing the main menu options. */
+    private MainMenu mainMenu;
 
-    /**
-     * The view that displays the main menu and captures user input for various options.
-     */
+    /** View class responsible for displaying the main menu to the user. */
     private MainMenuView menuView;
 
-    /**
-     * The name of the file used for loading and saving the list of students and their data.
-     */
-    private String filename;
+    /** Controller responsible for managing student-related operations. */
+    private StudentListController studentListController;
 
-    /**
-     * The messagePrinter object responsible for printing the asking for input messages
-     */
+    /** Utility class for printing messages to the user. */
     private MessagePrinter messagePrinter;
 
     /**
-     * Constructs a new MainMenuController.
+     * Constructor for MainMenuController.
+     * Initializes the scanners, view, model, and student list controller.
      *
-     * @param studentListController the controller managing student data
-     * @param menuView the view responsible for displaying the menu
+     * @param studentListController The controller managing student-related operations.
+     * @param menuView The view responsible for displaying the main menu.
      */
     public MainMenuController(StudentListController studentListController, MainMenuView menuView) {
         this.scanner = new Scanner(System.in);
         this.spacebarScanner = new Scanner(System.in).useDelimiter("\n");
         this.studentListController = studentListController;
         this.menuView = menuView;
+        this.mainMenu = new MainMenu();
         this.messagePrinter = new MessagePrinter();
     }
 
     /**
-     * Starts the main loop of the application, displaying the menu and handling user choices.
+     * Starts the main menu loop. It repeatedly shows the menu, gets the user's choice,
+     * and invokes the corresponding action based on the selection.
      */
     public void start() {
-
         boolean running = true;
 
         while (running) {
-            menuView.showMenu();
+            menuView.showMenu(mainMenu.getMenuOptions());
             int choice = getMenuChoice();
 
             switch (choice) {
@@ -105,9 +92,9 @@ public class MainMenuController {
     }
 
     /**
-     * Captures the user's menu option choice.
+     * Gets the user's menu choice as an integer.
      *
-     * @return The user's selected option as an integer.
+     * @return The chosen menu option as an integer.
      */
     public int getMenuChoice() {
         return scanner.nextInt();
@@ -127,7 +114,7 @@ public class MainMenuController {
                 return id;
             } else {
                 messagePrinter.printErrorMessage("Invalid input. Please enter a valid integer ID.");
-                scanner.next();
+                scanner.next();  // Clear invalid input
                 return -1;
             }
         }
@@ -194,13 +181,9 @@ public class MainMenuController {
     }
 
     /**
-     * Displays an invalid option message when the user selects an invalid menu choice.
-     */
-
-    /**
      * Adds a new student using inputs from the view.
      */
-    private void addStudent() {
+    public void addStudent() {
         int id = getStudentIdInput();
         if (id == -1) {
             return;
@@ -212,11 +195,10 @@ public class MainMenuController {
         messagePrinter.printSuccessMessage();
     }
 
-
     /**
      * Adds a grade to an existing student using inputs from the view.
      */
-    private void addGradeToStudent() {
+    public void addGradeToStudent() {
         int studentId = getStudentIdInput();
         if (studentId == -1) {
             return;
@@ -227,11 +209,10 @@ public class MainMenuController {
         studentListController.addGradeToStudent(studentId, grade, teacher, subject);
     }
 
-
     /**
      * Removes a student based on the provided ID.
      */
-    private void removeStudent() {
+    public void removeStudent() {
         int studentId = getStudentIdInput();
         studentListController.removeStudent(studentId);
     }
@@ -239,7 +220,7 @@ public class MainMenuController {
     /**
      * Removes a grade from a student based on the provided index.
      */
-    private void removeGradeFromStudent() {
+    public void removeGradeFromStudent() {
         int studentId = getStudentIdInput();
         int gradeIndex = getGradeIndexInput() - 1;
         studentListController.removeGradeFromStudent(studentId, gradeIndex);
@@ -248,14 +229,14 @@ public class MainMenuController {
     /**
      * Displays the list of students.
      */
-    private void displayStudents() {
+    public void displayStudents() {
         studentListController.updateView();
     }
 
     /**
      * Edits the data of an existing student using inputs from the view.
      */
-    private void editStudentData() {
+    public void editStudentData() {
         int studentId = getStudentIdInput();
         String newName = getStudentNameInput();
         String newSurname = getStudentSurnameInput();
@@ -265,7 +246,7 @@ public class MainMenuController {
     /**
      * Edits a grade for a student using inputs from the view.
      */
-    private void editStudentGrade() {
+    public void editStudentGrade() {
         int studentId = getStudentIdInput();
         int gradeIndex = getGradeIndexInput() - 1;
         String newGrade = getGradeInput().replace(',', '.');
