@@ -1,7 +1,5 @@
 package View;
 
-import java.util.Scanner;
-
 /**
  * The MainMenuView class represents the main menu interface for the student diary console application.
  * It provides methods to display the menu and capture user input for various operations such as adding,
@@ -15,9 +13,11 @@ public class MainMenuView {
 
     /**
      * Constructor for MainMenuView class.
-     * Initializes the scanners used for user input.
+     * Needed to use the showMenu() method
      */
-    public MainMenuView() {}
+    public MainMenuView() {
+        super();
+    }
 
     /**
      * Displays the main menu options to the user.
