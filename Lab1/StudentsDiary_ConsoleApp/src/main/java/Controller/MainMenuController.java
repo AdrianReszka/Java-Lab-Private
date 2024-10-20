@@ -96,7 +96,7 @@ public class MainMenuController {
      *
      * @return The chosen menu option as an integer.
      */
-    public int getMenuChoice() {
+    private int getMenuChoice() {
         return scanner.nextInt();
     }
 
@@ -105,7 +105,7 @@ public class MainMenuController {
      *
      * @return The entered student ID as an integer.
      */
-    public int getStudentIdInput() {
+    private int getStudentIdInput() {
         int id = -1;
         while (true) {
             messagePrinter.printInputMessage("Enter student ID (must be an integer): ");
@@ -125,7 +125,7 @@ public class MainMenuController {
      *
      * @return The entered student name as a string.
      */
-    public String getStudentNameInput() {
+    private String getStudentNameInput() {
         messagePrinter.printInputMessage("Enter student name: ");
         return scanner.next();
     }
@@ -135,7 +135,7 @@ public class MainMenuController {
      *
      * @return The entered student surname as a string.
      */
-    public String getStudentSurnameInput() {
+    private String getStudentSurnameInput() {
         messagePrinter.printInputMessage("Enter student surname: ");
         return scanner.next();
     }
@@ -145,7 +145,7 @@ public class MainMenuController {
      *
      * @return The entered grade value as a string.
      */
-    public String getGradeInput() {
+    private String getGradeInput() {
         messagePrinter.printInputMessage("Enter grade value (use dot or comma): ");
         return scanner.next();
     }
@@ -155,7 +155,7 @@ public class MainMenuController {
      *
      * @return The entered teacher name as a string.
      */
-    public String getTeacherInput() {
+    private String getTeacherInput() {
         messagePrinter.printInputMessage("Enter teacher name: ");
         return spacebarScanner.next();
     }
@@ -165,7 +165,7 @@ public class MainMenuController {
      *
      * @return The entered subject name as a string.
      */
-    public String getSubjectInput() {
+    private String getSubjectInput() {
         messagePrinter.printInputMessage("Enter subject name: ");
         return spacebarScanner.next();
     }
@@ -175,7 +175,7 @@ public class MainMenuController {
      *
      * @return The entered grade index as an integer (1-based index).
      */
-    public int getGradeIndexInput() {
+    private int getGradeIndexInput() {
         messagePrinter.printInputMessage("Enter grade index to remove/edit (1-based index): ");
         return scanner.nextInt();
     }
@@ -183,7 +183,7 @@ public class MainMenuController {
     /**
      * Adds a new student using inputs from the view.
      */
-    public void addStudent() {
+    private void addStudent() {
         int id = getStudentIdInput();
         if (id == -1) {
             return;
@@ -198,7 +198,7 @@ public class MainMenuController {
     /**
      * Adds a grade to an existing student using inputs from the view.
      */
-    public void addGradeToStudent() {
+    private void addGradeToStudent() {
         int studentId = getStudentIdInput();
         if (studentId == -1) {
             return;
@@ -212,7 +212,7 @@ public class MainMenuController {
     /**
      * Removes a student based on the provided ID.
      */
-    public void removeStudent() {
+    private void removeStudent() {
         int studentId = getStudentIdInput();
         studentListController.removeStudent(studentId);
     }
@@ -220,7 +220,7 @@ public class MainMenuController {
     /**
      * Removes a grade from a student based on the provided index.
      */
-    public void removeGradeFromStudent() {
+    private void removeGradeFromStudent() {
         int studentId = getStudentIdInput();
         int gradeIndex = getGradeIndexInput() - 1;
         studentListController.removeGradeFromStudent(studentId, gradeIndex);
@@ -229,14 +229,14 @@ public class MainMenuController {
     /**
      * Displays the list of students.
      */
-    public void displayStudents() {
+    private void displayStudents() {
         studentListController.updateView();
     }
 
     /**
      * Edits the data of an existing student using inputs from the view.
      */
-    public void editStudentData() {
+    private void editStudentData() {
         int studentId = getStudentIdInput();
         String newName = getStudentNameInput();
         String newSurname = getStudentSurnameInput();
@@ -246,7 +246,7 @@ public class MainMenuController {
     /**
      * Edits a grade for a student using inputs from the view.
      */
-    public void editStudentGrade() {
+    private void editStudentGrade() {
         int studentId = getStudentIdInput();
         int gradeIndex = getGradeIndexInput() - 1;
         String newGrade = getGradeInput().replace(',', '.');

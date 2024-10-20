@@ -35,28 +35,6 @@ public class MainMenu {
     }
 
     /**
-     * Returns the menu option for a given index.
-     *
-     * @param index The index of the option to retrieve.
-     * @return The menu option at the specified index, or null if out of bounds.
-     */
-    public String getOption(int index) {
-        if (index >= 0 && index < menuOptions.size()) {
-            return menuOptions.get(index);
-        }
-        return null;
-    }
-
-    /**
-     * Returns the total number of available options in the main menu.
-     *
-     * @return The number of menu options.
-     */
-    public int getNumberOfOptions() {
-        return menuOptions.size();
-    }
-
-    /**
      * Returns all menu options as a list.
      *
      * @return A list of all menu options.
