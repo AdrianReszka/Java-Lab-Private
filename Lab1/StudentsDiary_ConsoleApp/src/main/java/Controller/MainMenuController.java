@@ -14,30 +14,37 @@ import java.util.Scanner;
  */
 public class MainMenuController {
 
-    /** A scanner object used to capture user input from the console for general menu selections and numeric inputs. */
+    /**
+     * A scanner object used to capture user input from the console for general menu selections and numeric inputs.
+     */
     private Scanner scanner;
 
-    /** A scanner object configured to capture input from the console, specifically using a newline as the delimiter. */
+    /**
+     * A scanner object configured to capture input from the console, specifically using a newline as the delimiter.
+     */
     private Scanner spacebarScanner;
 
-    /** Model class representing the main menu options. */
+    /**
+     * Model class representing the main menu options.
+     */
     private MainMenu mainMenu;
 
-    /** View class responsible for displaying the main menu to the user. */
+    /**
+     * View class responsible for displaying the main menu to the user.
+     */
     private MainMenuView menuView;
 
-    /** Controller responsible for managing student-related operations. */
+    /**
+     * Controller responsible for managing student-related operations.
+     */
     private StudentListController studentListController;
-
-    /** Utility class for printing messages to the user. */
-    private MessagePrinter messagePrinter;
 
     /**
      * Constructor for MainMenuController.
      * Initializes the scanners, view, model, and student list controller.
      *
      * @param studentListController The controller managing student-related operations.
-     * @param menuView The view responsible for displaying the main menu.
+     * @param menuView              The view responsible for displaying the main menu.
      */
     public MainMenuController(StudentListController studentListController, MainMenuView menuView) {
         this.scanner = new Scanner(System.in);
@@ -45,7 +52,6 @@ public class MainMenuController {
         this.studentListController = studentListController;
         this.menuView = menuView;
         this.mainMenu = new MainMenu();
-        this.messagePrinter = new MessagePrinter();
     }
 
     /**
@@ -82,11 +88,11 @@ public class MainMenuController {
                     editStudentGrade();
                     break;
                 case 8:
-                    exitProgram();
+                    menuView.exitingProgramMessage();
                     running = false;
                     break;
                 default:
-                    messagePrinter.printErrorMessage("Invalid option. Please try again.");
+                    menuView.printWrongOptionMessage();
             }
         }
     }
@@ -108,12 +114,12 @@ public class MainMenuController {
     private int getStudentIdInput() {
         int id = -1;
         while (true) {
-            messagePrinter.printInputMessage("Enter student ID (must be an integer): ");
+            menuView.enterStudentIdMessage();
             if (scanner.hasNextInt()) {
                 id = scanner.nextInt();
                 return id;
             } else {
-                messagePrinter.printErrorMessage("Invalid input. Please enter a valid integer ID.");
+                menuView.printInvalidIdInputMessage();
                 scanner.next();  // Clear invalid input
                 return -1;
             }
@@ -126,7 +132,7 @@ public class MainMenuController {
      * @return The entered student name as a string.
      */
     private String getStudentNameInput() {
-        messagePrinter.printInputMessage("Enter student name: ");
+        menuView.enterStudentNameMessage();
         return scanner.next();
     }
 
@@ -136,7 +142,7 @@ public class MainMenuController {
      * @return The entered student surname as a string.
      */
     private String getStudentSurnameInput() {
-        messagePrinter.printInputMessage("Enter student surname: ");
+        menuView.enterStudentSurnameMessage();
         return scanner.next();
     }
 
@@ -146,7 +152,7 @@ public class MainMenuController {
      * @return The entered grade value as a string.
      */
     private String getGradeInput() {
-        messagePrinter.printInputMessage("Enter grade value (use dot or comma): ");
+        menuView.enterStudentGradeMessage();
         return scanner.next();
     }
 
@@ -156,7 +162,7 @@ public class MainMenuController {
      * @return The entered teacher name as a string.
      */
     private String getTeacherInput() {
-        messagePrinter.printInputMessage("Enter teacher name: ");
+        menuView.enterTeacherNameMessage();
         return spacebarScanner.next();
     }
 
@@ -166,7 +172,7 @@ public class MainMenuController {
      * @return The entered subject name as a string.
      */
     private String getSubjectInput() {
-        messagePrinter.printInputMessage("Enter subject name: ");
+        menuView.enterSubjectNameMessage();
         return spacebarScanner.next();
     }
 
@@ -176,7 +182,7 @@ public class MainMenuController {
      * @return The entered grade index as an integer (1-based index).
      */
     private int getGradeIndexInput() {
-        messagePrinter.printInputMessage("Enter grade index to remove/edit (1-based index): ");
+        menuView.enterGradeIndexMessage();
         return scanner.nextInt();
     }
 
@@ -188,11 +194,9 @@ public class MainMenuController {
         if (id == -1) {
             return;
         }
-
         String name = getStudentNameInput();
         String surname = getStudentSurnameInput();
         studentListController.createNewStudent(id, name, surname);
-        messagePrinter.printSuccessMessage();
     }
 
     /**
@@ -254,11 +258,5 @@ public class MainMenuController {
         String newSubject = getSubjectInput();
         studentListController.editGradeForStudent(studentId, gradeIndex, Double.parseDouble(newGrade), newTeacher, newSubject);
     }
-
-    /**
-     * Exits the program by saving the student data to a file and showing an exit message.
-     */
-    private void exitProgram() {
-        messagePrinter.printInputMessage("Exiting program...");
-    }
 }
+

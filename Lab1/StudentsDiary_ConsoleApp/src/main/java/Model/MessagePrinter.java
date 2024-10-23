@@ -1,8 +1,7 @@
 package Model;
 
 /**
- * MessagePrinter class used to print error and success messages in the catch statement
- * and in controller classes
+ * MessagePrinter class used to print error messages in the catch statement
  *
  * @author Adrian Reszka
  * @version 1.0
@@ -12,24 +11,12 @@ public class MessagePrinter {
 
     /**
      * Method responsible for printing error messages for specified exception
+     *
      * @param message the message to print
      */
     public void printErrorMessage(String message) {
         System.out.println(message);
     }
-
-    /**
-     * Method responsible for printing the success message
-     */
-    public void printSuccessMessage() {
-        System.out.println("Operation successful!");
-    }
-
-    /**
-     * Method responsible for printing the asking for input message
-     * @param message the message to print
-     */
-    public void printInputMessage(String message) {
-        System.out.print(message);
-    }
 }
+
+

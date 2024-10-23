@@ -56,8 +56,6 @@ public class StudentListController {
             studentList.addStudent(id, name, surname);
         } catch (StudentAlreadyExistsException e) {
             messagePrinter.printErrorMessage(e.getMessage());
-        } catch (StudentNotFoundException e) {
-            messagePrinter.printSuccessMessage();
         }
     }
 
@@ -69,7 +67,6 @@ public class StudentListController {
     public void removeStudent(int studentId) {
         try {
             studentList.removeStudent(studentId);
-            messagePrinter.printSuccessMessage();
         } catch (StudentNotFoundException e) {
             messagePrinter.printErrorMessage(e.getMessage());
         }
@@ -85,7 +82,6 @@ public class StudentListController {
     public void editStudentData(int studentId, String newName, String newSurname) {
         try {
             studentList.editStudentData(studentId, newName, newSurname);
-            messagePrinter.printSuccessMessage();
         } catch (StudentNotFoundException e) {
             messagePrinter.printErrorMessage(e.getMessage());
         }
@@ -102,7 +98,6 @@ public class StudentListController {
     public void addGradeToStudent(int studentId, String gradeInput, String teacher, String subject) {
         try {
             studentList.addGradeToStudent(studentId, gradeInput, teacher, subject);
-            messagePrinter.printSuccessMessage();
         } catch (StudentNotFoundException |  InvalidGradeFormatException | InvalidGradeIndexException e) {
             messagePrinter.printErrorMessage(e.getMessage());
         }
@@ -117,7 +112,6 @@ public class StudentListController {
     public void removeGradeFromStudent(int studentId, int gradeIndex) {
         try {
             studentList.removeGradeFromStudent(studentId, gradeIndex);
-            messagePrinter.printSuccessMessage();
         } catch (StudentNotFoundException | InvalidGradeIndexException e) {
             messagePrinter.printErrorMessage(e.getMessage());
         }
@@ -135,7 +129,6 @@ public class StudentListController {
     public void editGradeForStudent(int studentId, int gradeIndex, double newGradeValue, String newTeacher, String newSubject) {
         try {
             studentList.editStudentGrade(studentId, gradeIndex, newGradeValue, newTeacher, newSubject);
-            messagePrinter.printSuccessMessage();
         } catch (StudentNotFoundException | InvalidGradeIndexException | InvalidGradeFormatException e) {
             messagePrinter.printErrorMessage(e.getMessage());
         }
