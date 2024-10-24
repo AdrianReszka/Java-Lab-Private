@@ -15,4 +15,3 @@ public class StudentAlreadyExistsException extends Exception {
         super("Student with this ID already exists.");
     }
 }
-

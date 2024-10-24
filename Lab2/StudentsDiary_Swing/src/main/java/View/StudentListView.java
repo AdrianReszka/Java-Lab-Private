@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * The StudentListView class handles the display of student details and their grades in the console.
  * It prints a list of all students with their respective information.
  *
- * @author YourName
+ * @author Adrian Reszka
  * @version 1.0
  */
 public class StudentListView {

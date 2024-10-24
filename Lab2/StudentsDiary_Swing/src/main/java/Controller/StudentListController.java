@@ -11,7 +11,7 @@ import java.util.Comparator;
  * Controller responsible for managing a list of students and handling the interaction between the model and the view.
  * It includes functionalities like adding, removing, and editing students and their grades.
  *
- * @author YourName
+ * @author Adrian Reszka
  * @version 1.0
  */
 public class StudentListController {
