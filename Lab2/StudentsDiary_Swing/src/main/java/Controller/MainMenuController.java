@@ -184,8 +184,7 @@ public class MainMenuController {
 
         ArrayList<Student> sortedStudents = new ArrayList<>(studentList.getStudents());
         sortedStudents.sort(Comparator.comparingInt(Student::getId));
-
-        // Display student and grade details
+        
         for (Student student : sortedStudents) {
             textArea.append("ID: " + student.getId() + ", Name: " + student.getName() + ", Surname: " + student.getSurname() + "\n");
             for (Grade grade : student.getGrades()) {
